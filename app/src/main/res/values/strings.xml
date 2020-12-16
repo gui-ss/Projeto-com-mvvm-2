@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Segundo projeto com mvvm</string>
+    <string name="text_term">Eu concordo com os <a href="#"> Termos de Uso </a> do <br></br> Loyverse e li e confirmei a <a href="#"> Política de <br></br> Privacidade</a></string>
+</resources>

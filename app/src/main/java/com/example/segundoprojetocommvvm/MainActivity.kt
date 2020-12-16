@@ -1,11 +1,15 @@
 package com.example.segundoprojetocommvvm
 
+import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import org.w3c.dom.Text
 import androidx.lifecycle.observe
@@ -19,17 +23,32 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirme seus dados")
+        builder.setPositiveButton(
+                "Confirmar") { dialog, id ->
+            Toast.makeText(this, "Dados confirmados",Toast.LENGTH_SHORT).show()
+        }
+        builder.setNegativeButton(
+                "Cancelar") { dialog, id ->
+        }
+
+
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         viewModel.user.observe(this){
-            Toast.makeText(applicationContext, "Nome: ${it.nome} Email: ${it.email}", Toast.LENGTH_LONG).show()
+            builder.setMessage("Nome: ${it.nome} Email: ${it.email}")
+            builder.show()
         }
 
         btnNext.setOnClickListener {
            validateForm()
         }
 
+
     }
+
+
 
     private fun validateForm(){
         if (check_term.isChecked){
